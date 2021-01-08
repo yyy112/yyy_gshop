@@ -27,10 +27,10 @@ export default function ajax (url,data={},type='GET') {
 
     promise.then(function(response){
       // 成功了调用resolve()
-      return resolve(response.data)
+      resolve(response.data)
     }).catch(function(error){
       // 失败了调用reject()
-      return reject(error)
+      reject(error)
     })
 
   })

@@ -4,11 +4,22 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Msite from '../pages/Msite/Msite'
+/*import Msite from '../pages/Msite/Msite'
 import Order from '../pages/Order/Order'
 import Profile from '../pages/Profile/Profile'
-import Search from '../pages/Search/Search'
+import Search from '../pages/Search/Search'*/
+
+// 路由组件懒加载
+const Msite = () => import('../pages/Msite/Msite')
+const Order = () => import('../pages/Order/Order')
+const Profile = () => import('../pages/Profile/Profile')
+const Search = () => import('../pages/Search/Search')
+
 import Login from "../pages/Login/Login"
+import Shop from '../pages/Shop/Shop'
+import ShopGoods from "../pages/Shop/ShopGoods/ShopGoods"
+import ShopInfo from "../pages/Shop/ShopInfo/ShopInfo"
+import ShopRatings from "../pages/Shop/ShopRatings/ShopRatings"
 
 // 生命使用插件
 Vue.use(VueRouter)
@@ -18,7 +29,7 @@ export default new VueRouter({
   routes:[
     {
       path:'/msite',
-      component:Msite,
+      component:Msite, // 返回路由组件的函数，只有执行此函数，才会加载路由组件，这个函数在请求对应的路由路径时才会执行
       meta:{
         showFooter:true
       }
@@ -47,6 +58,28 @@ export default new VueRouter({
     {
       path:'/login',
       component:Login
+    },
+    {
+      path:'/shop',
+      component:Shop,
+      children:[
+        {
+          path:'/shop/goods',
+          component:ShopGoods
+        },
+        {
+          path:'/shop/ratings',
+          component: ShopRatings
+        },
+        {
+          path:'/shop/info',
+          component:ShopInfo
+        },
+        {
+          path:'',
+          redirect:'/shop/goods'
+        }
+      ]
     },
     {
       path:'/',

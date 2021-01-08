@@ -826,6 +826,9 @@
   font-size: 14px;
   background: transparent;
 }
+#app .content >.show .loginContainer .loginInner .login_content >form >div .login_message .right_phone{
+  color:black;
+}
 #app .content >.show .loginContainer .loginInner .login_content >form >div .login_verification {
   position: relative;
   margin-top: 16px;
@@ -869,6 +872,9 @@
   background: #fff;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,0.1);
   transition: transform 0.3s;
+}
+#app .content >.show .loginContainer .loginInner .login_content >form >div .login_verification .switch_button > .right{
+  transform: translateX(30px);
 }
 #app .content >.show .loginContainer .loginInner .login_content >form >div .login_hint {
   margin-top: 12px;

@@ -6,17 +6,17 @@
         <HeaderTop title="我的"></HeaderTop>
       </header>
       <section class="profile-number" >
-        <router-link to="/login" class="profile-link">
+        <router-link :to="userInfo._id?'/userinfo':'/login'" class="profile-link">
           <div class="profile_image">
             <i class="iconfont icon-person"></i>
           </div>
           <div class="user-info">
-            <p class="user-info-top">登录/注册</p>
+            <p class="user-info-top" v-if="!userInfo.phone">{{userInfo.name || '登录/注册'}}</p>
             <p>
                 <span class="user-icon">
                   <i class="iconfont icon-shouji icon-mobile"></i>
                 </span>
-              <span class="icon-mobile-number">暂无绑定手机号</span>
+              <span class="icon-mobile-number">{{userInfo.phone || '暂无绑定手机号'}}</span>
             </p>
           </div>
           <span class="arrow">
@@ -93,12 +93,43 @@
         </a>
       </section>
     </section>
+    <section class="profile_info_data border-1px">
+      <button style="width: 100%;background: red;color:#fff;height: 45px;font-size: 20px;border:none;margin-top:10px;"
+              v-if="userInfo._id" @click="logout"
+      >
+        退出登录
+      </button>
+<!--      <mt-button type="danger" style="width:100%;height: 45px;margin-top:10px;background: red">退出登录</mt-button>-->
+    </section>
   </div>
 </template>
 
 <script>
+  import {mapState} from 'vuex'
+  import { MessageBox } from 'mint-ui'
+
   import HeaderTop from "../../components/HeaderTop/HeaderTop";
+  // import actions from "../../store/actions";
   export default {
+    // #ff5f3e
+    computed:{
+      ...mapState(['userInfo'])
+    },
+    methods:{
+      logout(){
+        this.$store.dispatch('logout')
+        // window.confirm('确认退出码')
+        /*MessageBox.confirm('确定退出吗?').then(
+          action => {
+            // 请求退出
+            this.$store.dispatch('logout')
+          },
+          action => {
+            console.log('点击了取消')
+          }
+        )*/
+      }
+    },
     components:{
       HeaderTop
     }
